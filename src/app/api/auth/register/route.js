@@ -85,6 +85,9 @@ export async function POST(request) {
     );
   } catch (error) {
     console.error('Registration error:', error);
+    console.error('Error name:', error.name);
+    console.error('Error code:', error.$metadata?.httpStatusCode);
+    console.error('Error stack:', error.stack);
 
     if (error.message === 'USER_ALREADY_EXISTS') {
       return NextResponse.json(
@@ -106,6 +109,8 @@ export async function POST(request) {
           code: 'INTERNAL_ERROR',
           message: 'Failed to create account',
           details: error.message,
+          errorName: error.name,
+          errorCode: error.code || error.$metadata?.httpStatusCode,
         },
       },
       { status: 500 }

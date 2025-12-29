@@ -65,6 +65,9 @@ export async function POST(request) {
     });
   } catch (error) {
     console.error('Login error:', error);
+    console.error('Error name:', error.name);
+    console.error('Error code:', error.$metadata?.httpStatusCode);
+    console.error('Error stack:', error.stack);
 
     return NextResponse.json(
       {
@@ -73,6 +76,8 @@ export async function POST(request) {
           code: 'INTERNAL_ERROR',
           message: 'Login failed',
           details: error.message,
+          errorName: error.name,
+          errorCode: error.code || error.$metadata?.httpStatusCode,
         },
       },
       { status: 500 }

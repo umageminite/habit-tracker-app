@@ -22,6 +22,15 @@ const missingEnvVars = requiredEnvVars.filter(
   (varName) => !process.env[varName]
 );
 
+// Log environment variables for debugging (hide sensitive values)
+console.log('AWS Config - Environment Variables Check:');
+console.log('REGION:', process.env.REGION || 'NOT SET');
+console.log('ACCESS_KEY_ID:', process.env.ACCESS_KEY_ID ? 'SET (hidden)' : 'NOT SET');
+console.log('SECRET_ACCESS_KEY:', process.env.SECRET_ACCESS_KEY ? 'SET (hidden)' : 'NOT SET');
+console.log('DYNAMODB_USERS_TABLE:', process.env.DYNAMODB_USERS_TABLE || 'NOT SET');
+console.log('DYNAMODB_HABITS_TABLE:', process.env.DYNAMODB_HABITS_TABLE || 'NOT SET');
+console.log('DYNAMODB_COMPLETIONS_TABLE:', process.env.DYNAMODB_COMPLETIONS_TABLE || 'NOT SET');
+
 if (missingEnvVars.length > 0) {
   console.warn(
     `Warning: Missing environment variables: ${missingEnvVars.join(', ')}`
