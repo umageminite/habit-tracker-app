@@ -10,9 +10,9 @@ import { DynamoDBDocumentClient } from '@aws-sdk/lib-dynamodb';
 
 // Validate required environment variables
 const requiredEnvVars = [
-  'AWS_REGION',
-  'AWS_ACCESS_KEY_ID',
-  'AWS_SECRET_ACCESS_KEY',
+  'REGION',
+  'ACCESS_KEY_ID',
+  'SECRET_ACCESS_KEY',
   'DYNAMODB_USERS_TABLE',
   'DYNAMODB_HABITS_TABLE',
   'DYNAMODB_COMPLETIONS_TABLE',
@@ -30,10 +30,10 @@ if (missingEnvVars.length > 0) {
 
 // Create DynamoDB client
 const client = new DynamoDBClient({
-  region: process.env.AWS_REGION || 'us-east-1',
+  region: process.env.REGION || 'us-east-1',
   credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID || '',
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || '',
+    accessKeyId: process.env.ACCESS_KEY_ID || '',
+    secretAccessKey: process.env.SECRET_ACCESS_KEY || '',
   },
 });
 

@@ -81,9 +81,10 @@ Make sure your `package.json` has the correct build script:
 Create a `.env.example` file to document required environment variables:
 
 ```
-AWS_REGION=us-east-1
-AWS_ACCESS_KEY_ID=your_access_key_here
-AWS_SECRET_ACCESS_KEY=your_secret_key_here
+# Note: AWS_ prefix is reserved in AWS Amplify
+REGION=us-east-1
+ACCESS_KEY_ID=your_access_key_here
+SECRET_ACCESS_KEY=your_secret_key_here
 DYNAMODB_USERS_TABLE=habit-tracker-users
 DYNAMODB_HABITS_TABLE=habit-tracker-habits
 ```
@@ -182,11 +183,13 @@ Click **"Next"**
 
 | Key | Value |
 |-----|-------|
-| `AWS_REGION` | `us-east-1` (or your region) |
-| `AWS_ACCESS_KEY_ID` | Your AWS Access Key |
-| `AWS_SECRET_ACCESS_KEY` | Your AWS Secret Key |
+| `REGION` | `us-east-1` (or your region) |
+| `ACCESS_KEY_ID` | Your AWS Access Key |
+| `SECRET_ACCESS_KEY` | Your AWS Secret Key |
 | `DYNAMODB_USERS_TABLE` | `habit-tracker-users` |
 | `DYNAMODB_HABITS_TABLE` | `habit-tracker-habits` |
+
+**⚠️ Important:** Do NOT use `AWS_` prefix for environment variables in Amplify - it's reserved by AWS.
 
 **Where to get AWS credentials?**
 
