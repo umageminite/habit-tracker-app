@@ -30,6 +30,8 @@ console.log('SECRET_ACCESS_KEY:', process.env.SECRET_ACCESS_KEY ? 'SET (hidden)'
 console.log('DYNAMODB_USERS_TABLE:', process.env.DYNAMODB_USERS_TABLE || 'NOT SET');
 console.log('DYNAMODB_HABITS_TABLE:', process.env.DYNAMODB_HABITS_TABLE || 'NOT SET');
 console.log('DYNAMODB_COMPLETIONS_TABLE:', process.env.DYNAMODB_COMPLETIONS_TABLE || 'NOT SET');
+console.log('VINOD:', process.env.VINOD || 'NOT SET');
+
 
 if (missingEnvVars.length > 0) {
   console.warn(
