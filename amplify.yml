@@ -1,0 +1,48 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        # Install dependencies
+        - npm ci
+
+        # Create .env.production from Amplify environment variables
+        - echo "Creating .env.production from environment variables..."
+        - |
+          cat > .env.production << EOF
+          # AWS Configuration (Note: Don't use AWS_ prefix - it's reserved)
+          REGION=$REGION
+          ACCESS_KEY_ID=$ACCESS_KEY_ID
+          SECRET_ACCESS_KEY=$SECRET_ACCESS_KEY
+
+          # DynamoDB Table Names
+          DYNAMODB_USERS_TABLE=$DYNAMODB_USERS_TABLE
+          DYNAMODB_HABITS_TABLE=$DYNAMODB_HABITS_TABLE
+          DYNAMODB_COMPLETIONS_TABLE=$DYNAMODB_COMPLETIONS_TABLE
+
+          # JWT Secret for Authentication
+          JWT_SECRET=$JWT_SECRET
+          EOF
+
+        # Verify .env.production was created (without exposing secrets)
+        - echo "Verifying .env.production file..."
+        - ls -la .env.production
+        - echo "Environment variables loaded into .env.production"
+
+    build:
+      commands:
+        # Build the Next.js application
+        - npm run build
+
+  artifacts:
+    # Output directory for Next.js
+    baseDirectory: .next
+    files:
+      - '**/*'
+
+  cache:
+    paths:
+      # Cache node_modules for faster builds
+      - node_modules/**/*
+      # Cache Next.js build cache
+      - .next/cache/**/*
